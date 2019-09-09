@@ -9,11 +9,13 @@ router.use((req, res, next) => {
 })
 // define the home page route
 router.get('/', (req, res) => {
-    res.send(ccxt.exchanges)
+  res.set("Access-Control-Allow-Origin", "*");
+  res.send(ccxt.exchanges)
 })
 
 // define the about route
 router.post('/', (req, res) => {
+
 })
 
 module.exports = router

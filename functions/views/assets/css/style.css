@@ -16,3 +16,27 @@ table{
     padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
     box-sizing: content-box; /* So the width will be 100% + 17px */
 }
+
+
+.fixed-plugin {
+    position: inherit;
+    width: 400% !important;
+    background: rgba(0, 0, 0, 0.0) !important;
+    border-radius: 8px 8px 8px 8px !important;
+}
+
+
+.fixed-plugin .badge{
+    margin:12px  20px 12px 20px!important;
+    width: 20px !important;
+    height: 20px !important;
+
+}
+
+.search-bar{
+    margin-left:0px !important;
+}
+
+.card-chart .chart-area {
+    height: 60vh !important;
+}
