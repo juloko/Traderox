@@ -30,7 +30,6 @@ function ajax(funct,method,data) {
 function getExchanges() {
   ajax("getExchanges","GET",""
   ).then(data => {
-    console.log("Exchanges:", data);
     fillExchangesAvailable(data);
   }).catch(error => {
       console.log("Error getExchanges().", error);

@@ -1,8 +1,9 @@
 function fillExchangesAvailable(data) {
-    $('.workExchanges').find('table tbody').html("");
-    $(".workExchanges").show()
+    $('#workExchanges').find('tbody').html("");
+    $('#workExchanges').find('.card-category').html(`Availables (${data.length})`);
+    $("#workExchanges").find('.card-body').show()
     data.forEach(element => {
-        $('.workExchanges').find('table tbody').append(
+        $('#workExchanges').find('table tbody').append(
             `<tr id="${element}-workExcg">
                 <td>
                 ${element}
