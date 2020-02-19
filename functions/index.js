@@ -30,13 +30,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //Render the htmls.
-app.post('/home', (req, res) => {
+app.get('/home', (req, res) => {
     res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
     res.render('home');
 });
 
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('home');
 });
+
+//Brasiliex API
+app.use('/getMarket', require('./routers/ccxt/getMarket'))
+
 
 exports.app = functions.https.onRequest(app);
