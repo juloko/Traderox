@@ -9,8 +9,7 @@ const Alpaca = require('@alpacahq/alpaca-trade-api')
 
 
 //Init firebase.
-admin.initializeApp(functions.config().firebase);
-admin.firestore().settings({ timestampsInSnapshots: true });
+// admin.initializeApp(functions.config().firebase);
 
 // Automatically allow cross-origin requests
 app.use(cors());
