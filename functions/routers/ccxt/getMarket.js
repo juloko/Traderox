@@ -38,26 +38,23 @@ router.get('/', (req, res) => {
 
   const symbol = 'LTC/BTC';
   const since = undefined
-  const limit = 1000 // change for your limit
+  const limit = 500 // change for your limit
   const params = {
-    'fromId': 66666, // exchange-specific non-unified parameter name
+    'fromId': 66667, // exchange-specific non-unified parameter name
     // 'fromId': data[i].id.toString(), // exchange-specific non-unified parameter name
   }
   binance.fetchTrades(symbol, since, limit, params).then((dataSet) => {
     var data = [];
-    var dataSetProm = [];
     for (i = 0; i < dataSet.length; i++) {
       data.push(filterTicker(dataSet[i]))
-      dataSetProm[i] = db.doc(`
-      exchanges/${exchangeId}/${symbol.replace("/", "_")}/${data[i].id.toString()}`)
+      db.doc(`exchanges/${exchangeId}/${symbol.replace("/", "_")}/${data[i].id.toString()}`)
         .set(data[i], { merge: true })
+        .then((resp) => {
+          console.log(resp)
+        }).catch(error => {
+          console.log("Got an error", error);
+        });
     }
-    return Promise.all(dataSetProm)
-      .then(() => {
-        throw res.send(data);
-      }).catch(error => {
-        console.log("Got an error", error);
-      });
   }).catch(error => {
     console.log("Got an error", error);
   });
