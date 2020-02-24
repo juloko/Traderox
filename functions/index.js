@@ -5,11 +5,15 @@ const engine = require('consolidate');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const Alpaca = require('@alpacahq/alpaca-trade-api')
+const serviceAccountKey = require('./credentials/serviceAccountKey.json');
 
 
 //Init firebase.
-// admin.initializeApp(functions.config().firebase);
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccountKey),
+    databaseURL: "https://traderox.firebaseio.com"
+});
+admin.firestore().settings({ timestampsInSnapshots: true });
 
 // Automatically allow cross-origin requests
 app.use(cors());

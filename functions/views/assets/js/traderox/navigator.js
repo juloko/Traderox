@@ -1,47 +1,61 @@
-function animateDashboard(page){
-    $.when(
-        $.get(page, function(data) {
-            $('.content').html(data);
-        })
-    ).done(function() {
-        demo.initDashboardPageCharts();
-
-        
-    });
-}
-
 $(document).ready(function () {
     animateDashboard("dashboard.html")
 });
 
-$("#dashboard").on("click", function amor() {
+$("#dashboard").on("click", function () {
     $('.nav li.active').removeClass('active');
     $(this).parent().addClass('active');
-    animateDashboard("dashboard.html",$(this).parent())
-    $('.navbar-brand').html('Dashboard');
+    $.when(
+        $.get("dashboard.html", function (data) {
+            $('.content').html(data);
+        })
+    ).done(function () {
+        demo.initDashboardPageCharts();
+        $('.navbar-brand').html('Dashboard');
+    });
+});
+
+$("#dataBank").on("click", function () {
+    $('.nav li.active').removeClass('active');
+    $(this).parent().addClass('active');
+    $.when(
+        $.get("dataBank.html", function (data) {
+            $('.content').html(data);
+        })
+    ).done(function () {
+        $('.navbar-brand').html('Data Bank');
+        fillDatabank()
+    });
 });
 
 $("#myProfile").on("click", function () {
     $('.nav li.active').removeClass('active');
     $(this).parent().addClass('active');
-    $('.content').load("myProfile.html");
-    $('.navbar-brand').html('My Profile');
-
+    $.when(
+        $.get("myProfile.html", function (data) {
+            $('.content').html(data);
+        })
+    ).done(function () {
+        $('.navbar-brand').html('My Profile');
+    });
 });
 
-$("#exchanges").on("click", function () {
+$("#lalaland").on("click", function () {
     $('.nav li.active').removeClass('active');
     $(this).parent().addClass('active');
-    animateDashboard("exchanges.html")
-    $('.navbar-brand').html('Exchanges');
-    getExchanges();
+    $.when(
+        $.get("lalaland.html", function (data) {
+            $('.content').html(data);
+        })
+    ).done(function () {
+        $('.navbar-brand').html('Lalaland');
+    });
 });
 
-
-$('.light-badge').click(function() {
+$('.light-badge').click(function () {
     $('body').addClass('white-content');
-  });
+});
 
-  $('.dark-badge').click(function() {
+$('.dark-badge').click(function () {
     $('body').removeClass('white-content');
-  });
+});

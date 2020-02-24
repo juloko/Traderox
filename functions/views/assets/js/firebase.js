@@ -47,18 +47,6 @@ db = firebase.firestore();
 const dbUser = firestore.collection("users/");
 
 
-var docRef = db.collection("exchanges").doc("binance");
-
-docRef.get().then(function(doc) {
-    if (doc.exists) {
-        console.log("Document data:", doc.data());
-    } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-    }
-}).catch(function(error) {
-    console.log("Error getting document:", error);
-});
 
 
 // Login functions.

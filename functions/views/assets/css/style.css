@@ -39,3 +39,21 @@ table{
 .card-chart .chart-area {
     height: 60vh !important;
 }
+
+.text-normal{
+    text-transform: inherit !important;
+}
+
+#dtBank td, #dtBank td{
+    width: 20% !important;
+}
+
+
+#dtBank td:first-child, #dtBank td:first-child{
+    width: 40% !important;
+}
+
+.form-check{
+    text-align: center; /* center checkbox horizontally */
+    vertical-align: middle; /* center checkbox vertically */
+}
