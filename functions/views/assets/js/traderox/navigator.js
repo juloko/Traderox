@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    animateDashboard("dashboard.html")
+    $("#dashboard").click();
+
 });
 
 $("#dashboard").on("click", function () {
@@ -59,3 +60,17 @@ $('.light-badge').click(function () {
 $('.dark-badge').click(function () {
     $('body').removeClass('white-content');
 });
+
+function dangerError(msg) {
+    $.notify({
+        icon: "tim-icons ui-1_bell-53",
+        message: msg
+      }, {
+        type: 'danger',
+        timer: 4000,
+        placement: {
+          from: 'top',
+          align: 'right'
+        }
+      });
+}

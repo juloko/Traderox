@@ -40,5 +40,25 @@ function getExchanges() {
 
 async function getMarket() {
   return await ajax("getMarket", "GET", "");
-  
+
+}
+
+async function getNowTick(symbol) {
+  return await ajax("getNowTick", "GET", {'symbol': symbol});
+}
+
+quickSort = (array) => {
+  if (array.length < 2) {
+    return array
+  }
+  const chosenIndex = array.length - 1
+  const chosen = array[chosenIndex]
+  const a = []
+  const b = []
+  for (let i = 0; i < chosenIndex; i++) {
+    const temp = array[i]
+    temp < chosen ? a.push(temp) : b.push(temp)
+  }
+  const output = [...quickSort(a), chosen, ...quickSort(b)]
+  return output
 }

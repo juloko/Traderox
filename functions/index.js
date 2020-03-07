@@ -44,6 +44,7 @@ app.get('/', (req, res) => {
 
 //Brasiliex API
 app.use('/getMarket', require('./routers/ccxt/getMarket'))
+app.use('/getNowTick', require('./routers/ccxt/getNowTick'))
 
 
 exports.app = functions.https.onRequest(app);

@@ -44,7 +44,6 @@ var apiKey = null;
 
 // Firestore variables and constants.
 db = firebase.firestore();
-const dbUser = firestore.collection("users/");
 
 
 
@@ -184,84 +183,84 @@ if (updateButton) {
     });
 }
 
-// Shared functions.
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        if (_displayName) {
-            dbUser.doc(firebase.auth().currentUser.uid).get()
-                .then((doc) => {
-                    if (doc.exists) {
-                        for (var i in doc.data())
-                            if (!doc.data()[i])
-                                document.getElementById('btnAccounts').click();
-                        if (!doc.data().displayName) {
-                            snackbar("Username it's missing, fill your user.");
-                        } else {
-                            _displayName.value = doc.data().displayName || "";
-                            _displayName.parentElement.classList.add('is-dirty');
-                        }
-                        if (!doc.data().email) {
-                            snackbar("Email it's missing, fill your user.");
-                        } else {
-                            _email.value = doc.data().email || "";
-                            _email.parentElement.classList.add('is-dirty');
-                        }
-                        if (!doc.data().photoURL) {
-                            snackbar("URL of photo it's missing, fill your user.");
-                        } else {
-                            _photoURL.value = doc.data().photoURL || "";
-                            _photoURL.parentElement.classList.add('is-dirty');
-                        }
-                        if (!doc.data().password_betfair) {
-                            snackbar("Password Betfair it's missing, fill your user.");
-                        } else if (!doc.data().apiKey) {
-                            snackbar("API key Betfair it's missing, fill your user.");
-                        } else {
-                            addBetfair(doc.data().displayName, doc.data().password_betfair, doc.data().apiKey)
-                            main();
-                        }
-                        componentHandler.upgradeAllRegistered();
-                    } else {
-                        document.getElementById('btnAccounts').click();
-                        snackbar("You need to fill your user.");
-                    }
-                    return "I'm done!"
-                }).catch((error) => {
-                    return snackbar(error);
-                });
-        } else {
-            if (titleText.innerHTML === "Sign Up") {
-                return dbUser.doc(firebase.auth().currentUser.uid).set({
-                    email: emailText.value,
-                    uid: firebase.auth().currentUser.uid
-                }).then(() => {
-                    loginBox.style.display = "none";
-                    reportText.style.display = "block";
-                    if (window.location.href === "http://127.0.0.1:5500/functions/views/index.html") {
-                        window.location.href = "http://127.0.0.1:5500/functions/views/home.html";
-                    } else {
-                        post("/home");
-                    }
-                    return snackbar("Init");
-                }).catch((error) => {
-                    snackbar("Auth" + error);
-                });
-            } else if (window.location.href === "http://127.0.0.1:5500/functions/views/index.html") {
-                window.location.href = "http://127.0.0.1:5500/functions/views/home.html";
-            } else {
-                post("/home");
-            }
-        }
-    } else {
-        displayName = null;
-        email = null;
-        photoURL = null;
-        uid = null;
-        password_betfair = null;
-        apiKey = null;
-    }
-    return user;
-});
+// // Shared functions.
+// firebase.auth().onAuthStateChanged((user) => {
+//     if (user) {
+//         if (_displayName) {
+//             dbUser.doc(firebase.auth().currentUser.uid).get()
+//                 .then((doc) => {
+//                     if (doc.exists) {
+//                         for (var i in doc.data())
+//                             if (!doc.data()[i])
+//                                 document.getElementById('btnAccounts').click();
+//                         if (!doc.data().displayName) {
+//                             snackbar("Username it's missing, fill your user.");
+//                         } else {
+//                             _displayName.value = doc.data().displayName || "";
+//                             _displayName.parentElement.classList.add('is-dirty');
+//                         }
+//                         if (!doc.data().email) {
+//                             snackbar("Email it's missing, fill your user.");
+//                         } else {
+//                             _email.value = doc.data().email || "";
+//                             _email.parentElement.classList.add('is-dirty');
+//                         }
+//                         if (!doc.data().photoURL) {
+//                             snackbar("URL of photo it's missing, fill your user.");
+//                         } else {
+//                             _photoURL.value = doc.data().photoURL || "";
+//                             _photoURL.parentElement.classList.add('is-dirty');
+//                         }
+//                         if (!doc.data().password_betfair) {
+//                             snackbar("Password Betfair it's missing, fill your user.");
+//                         } else if (!doc.data().apiKey) {
+//                             snackbar("API key Betfair it's missing, fill your user.");
+//                         } else {
+//                             addBetfair(doc.data().displayName, doc.data().password_betfair, doc.data().apiKey)
+//                             main();
+//                         }
+//                         componentHandler.upgradeAllRegistered();
+//                     } else {
+//                         document.getElementById('btnAccounts').click();
+//                         snackbar("You need to fill your user.");
+//                     }
+//                     return "I'm done!"
+//                 }).catch((error) => {
+//                     return snackbar(error);
+//                 });
+//         } else {
+//             if (titleText.innerHTML === "Sign Up") {
+//                 return dbUser.doc(firebase.auth().currentUser.uid).set({
+//                     email: emailText.value,
+//                     uid: firebase.auth().currentUser.uid
+//                 }).then(() => {
+//                     loginBox.style.display = "none";
+//                     reportText.style.display = "block";
+//                     if (window.location.href === "http://127.0.0.1:5500/functions/views/index.html") {
+//                         window.location.href = "http://127.0.0.1:5500/functions/views/home.html";
+//                     } else {
+//                         post("/home");
+//                     }
+//                     return snackbar("Init");
+//                 }).catch((error) => {
+//                     snackbar("Auth" + error);
+//                 });
+//             } else if (window.location.href === "http://127.0.0.1:5500/functions/views/index.html") {
+//                 window.location.href = "http://127.0.0.1:5500/functions/views/home.html";
+//             } else {
+//                 post("/home");
+//             }
+//         }
+//     } else {
+//         displayName = null;
+//         email = null;
+//         photoURL = null;
+//         uid = null;
+//         password_betfair = null;
+//         apiKey = null;
+//     }
+//     return user;
+// });
 
 function logout() {
     firebase.auth().signOut()
